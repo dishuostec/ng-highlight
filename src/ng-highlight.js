@@ -12,6 +12,7 @@ angular.module('ng-highlight', []).directive('ngHighlight', function()
         var wordClone = wordNode.cloneNode(true);
         wrapper.appendChild(wordClone);
         wordNode.parentNode.replaceChild(wrapper, wordNode);
+        found ++;
         return 1; //skip added node in parent
       }
     } else if ((node.nodeType === 1 && node.childNodes) &&
@@ -26,6 +27,8 @@ angular.module('ng-highlight', []).directive('ngHighlight', function()
   };
   var highlight = function(word, element, option)
   {
+    found = 0;
+
     if (word === undefined || word.length === 0) {
       return;
     }
@@ -54,12 +57,14 @@ angular.module('ng-highlight', []).directive('ngHighlight', function()
       parent.normalize();
     });
   };
+  var found = 0;
 
   return {
     replace : false,
     restrict: 'A',
     scope   : {
-      keyword: '&ngHighlight'
+      keyword : '&ngHighlight',
+      callback: '=hlCallback'
     },
     link    : function(scope, iElement, iAttr)
     {
@@ -85,10 +90,17 @@ angular.module('ng-highlight', []).directive('ngHighlight', function()
         : ! ! iAttr.hlMatchWholeWord;
       }
 
-      scope.$watch(scope.keyword, function(newKeyword)
+      scope.$watch(scope.keyword, function(newKeyword, prevKeyword)
       {
+        if (newKeyword === undefined) {
+          return;
+        }
+
         unhightlight(iElement, option);
         highlight(newKeyword, iElement[0], option);
+        if (scope.callback !== undefined) {
+          scope.callback(found);
+        }
       });
     }
   };
