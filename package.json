@@ -1,6 +1,6 @@
 {
   "name": "ng-highlight",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": false,
   "devDependencies": {
     "grunt": "~0.4.1",
