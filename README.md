@@ -11,7 +11,7 @@ Angularjs 1.2+
 
 Demo and useage
 --------------
-Please see demo directory.
+http://dishuostec.github.io/ng-highlight
 
 License
 --------------
