@@ -1,0 +1,11 @@
+{
+  "name": "ng-highlight",
+  "version": "0.0.1",
+  "private": false,
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-jshint": "~0.7.1",
+    "load-grunt-tasks": "~0.2.0"
+ }
+}
